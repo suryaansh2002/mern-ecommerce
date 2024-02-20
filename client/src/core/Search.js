@@ -60,11 +60,13 @@ const Search = () => {
   const searchData = () => {
     // console.log(search, category);
     if (search) {
+      console.log(category)
       list({ search: search || undefined, category: category }).then(
         (response) => {
           if (response.error) {
             console.log(response.error);
           } else {
+            console.log(response)
             setData({ ...data, results: response, searched: true });
           }
         }
@@ -91,6 +93,7 @@ const Search = () => {
   };
 
   const searchedProducts = (results = []) => {
+    console.log(results)
     return (
       <div className='row'>
         <div className='col-md-1'></div>
@@ -112,56 +115,30 @@ const Search = () => {
   const classes = useStyles();
 
   const searchForm = () => (
-    <form onSubmit={searchSubmit} className={classes.root}>
-      <span className='input-group-text'>
-        <div className='input-group input-group-lg'>
-          {/* <div className='input-group-prepend'>
-            <FormControl className={classes.formControl}>
-              <InputLabel id='demo-simple-select-helper-label'>
-                Select
-              </InputLabel>
-              <Select
-                labelId='demo-simple-select-placeholder-label-label'
-                id='demo-simple-select-placeholder-label'
-                value={data.name}
-                onChange={handleChange('category')}
-                displayEmpty
-                className={classes.selectEmpty}
-              >
-                <MenuItem value='All'>
-                  <em>All</em>
-                </MenuItem>
-                {categories.map((c, i) => (
-                  <MenuItem key={i} value={c._id}>
-                    {c.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </div> */}
-
-          <TextField
+    <>
+ 
+    <form onSubmit={searchSubmit} className={classes.root}>        
+       
+    <TextField
             onChange={handleChange('search')}
             id='outlined-basic'
             label={<span><SearchIcon/>Search by name</span>}
             variant='outlined'
-            className={classes.tField}
+            className='search-input'
             autoComplete='off'
           />
 
-          <div className='ml-3 mt-2' style={{ border: 'none' }}>
-            <Button ml={2} variant='contained' color='primary' type='submit'>
+            <Button ml={2} variant='contained' color='primary' type='submit' className='search-btn'>
               Search
             </Button>
-          </div>
-        </div>
-      </span>
+  
     </form>
+  </>
   );
 
   return (
     <div className='row'>
-      <div className='container mb-3'>{searchForm()}</div>
+      <div className='container mb-1' style={{ textAlign:'center'}}>{searchForm()}</div>
       <div className='container-fluid mb-3'>{searchedProducts(results)}</div>
     </div>
   );

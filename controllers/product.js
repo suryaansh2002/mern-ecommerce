@@ -265,8 +265,12 @@ exports.listSearch = (req, res) => {
           error: errorHandler(err),
         });
       }
+      console.log(products)
       res.json(products);
-    }).select('-photo');
+    }).select('-photo')
+    .populate('category')
+
+    ;
   }
 };
 

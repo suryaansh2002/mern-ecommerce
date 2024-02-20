@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import ShowImage from './ShowImage';
 import moment from 'moment';
-
+import './core.css'
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import CameraIcon from '@material-ui/icons/PhotoCamera';
@@ -94,7 +94,9 @@ const Card = ({
   const showAddToCartBtn = (showAddToCartButton) => {
     return (
       showAddToCartButton && (
-        <Button onClick={addToCart} variant='outlined' color='secondary'>
+        <Button onClick={addToCart} style={{width:'100%' , border:'1px solid'}} 
+        variant='contained'
+        color='primary'>
           Add to cart
         </Button>
       )
@@ -197,16 +199,16 @@ const Card = ({
               <Typography gutterBottom variant='h5' component='h2'>
                 {product.name}
               </Typography>
-              <Typography className={classes.productDescription}>{product.description.substring(0, 100)}</Typography>
-              <p className='black-10'>Price: Rs. {product.price}</p>
-              <p className='black-9'>
-                Category: {product.category && product.category.name}{' '}
-              </p>{' '}
-              {/* <p className='black-8'>
-                Added on {moment(product.createdAt).fromNow()}{' '}
-              </p> */}
-              {showStock(product.quantity)}
-              <br></br>
+              <Typography className={"product-desc"}>{product.description.substring(0, 100)}</Typography>
+              <div className='card-flex'>
+                <div>
+                  <span> {product.category && product.category.name}</span>
+                </div>
+                <div className='card-price'>
+                Rs. {product.price}
+                </div>
+              </div>
+
               <span>
                 {/* {showViewButton(showViewProductButton)} */}
                 {showAddToCartBtn(showAddToCartButton)}

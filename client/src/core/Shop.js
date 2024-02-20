@@ -10,6 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Search from './Search';
 import { prices } from './fixedPrices';
 import Copyright from './Copyright';
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 const Shop = () => {
   const [myFilters, setMyFilters] = useState({
@@ -22,6 +23,7 @@ const Shop = () => {
   const [skip, setSkip] = useState(0);
   const [size, setSize] = useState(0);
   const [filteredResults, setFilteredResults] = useState([]);
+  const [showFilter, setShowFilters] = useState(false)
 
   const init = () => {
     getCategories().then((data) => {
@@ -125,27 +127,18 @@ const Shop = () => {
       className='container-fluid'
     >
       <Search />
-      <div className='row'>
-        <div className='col-md-2'>
-          <h4>Filter by categories</h4>
-          <ul>
+      <div className='row' style={{width:'100%'}}>
+        <div className='col-md-2' style={{textAlign:'left'}}>
+          <h4 className='filter-heading' onClick={()=>{setShowFilters(!showFilter)}}>Filter by Category {showFilter ?<FaChevronUp/> : <FaChevronDown/>}</h4>
+         {showFilter && <ul className='filter-list'>
             <Checkbox
               categories={categories}
               handleFilters={(filters) => handleFilters(filters, 'category')}
             />
-          </ul>
-
-          {/* <h4>Filter by price range</h4>
-          <div>
-            <RadioBox
-              prices={prices}
-              handleFilters={(filters) => handleFilters(filters, 'price')}
-            />
-          </div> */}
+          </ul>}
         </div>
 
-        <div className='col-md-10'>
-          <h2 className='mb-2'>Products</h2>
+        <div className='col-md-10' style={{width: '100%', margin: 0, padding: 0}}>
           <div className='row'>
             {filteredResults.filter((item)=>item.quantity>0).map((product, i) => (
               <div key={i} className='col-xl-4 col-lg-6 col-md-12 col-sm-12'>

@@ -37,7 +37,7 @@ const Orders = () => {
   const showOrdersLength = () => {
     if (orders.length > 0) {
       return (
-        <h1 className='text-danger display-2'>Total orders: {orders.length}</h1>
+        <h1 className='orders-header'>Total orders: {orders.length}</h1>
       );
     } else {
       return <h1 className='text-danger'>No orders</h1>;
@@ -96,31 +96,35 @@ const Orders = () => {
                 className='mt-5'
                 key={oIndex}
                 style={{ borderBottom: '5px solid indigo' }}
-              >
-                <h2 className='mb-5'>
-                  <span className='bg-primary'>Order ID: {o._id}</span>
-                </h2>
+              >             
 
                 <ul className='list-group mb-2'>
                   <li className='list-group-item'>{showStatus(o)}</li>
-                  <li className='list-group-item'>
-                    Transaction ID: {o.transaction_id}
-                  </li>
+                  <li className='list-group-item'>Order ID: {o._id}</li>
                   <li className='list-group-item'>Amount: Rs.{o.amount}</li>
                   <li className='list-group-item'>Ordered by: {o.user.name}</li>
                   <li className='list-group-item'>
-                    Ordered on: {moment(o.createdAt).fromNow()}
+                    Ordered on: {moment(o.createdAt).format('DD-MM-YY HH:MM')} ({moment(o.createdAt).fromNow()})
                   </li>
                   <li className='list-group-item'>
                     Delivery address: {o.address}
                   </li>
+                  <li className='list-group-item'>
+                  </li>
+                  <li className='list-group-item'>
+                    No. of Products in Order: {o.products.length}
+                  </li>
+              
+                {o.products.map((p, pIndex) => (
+          <li className='list-group-item'>
+            {p.name} (Rs. {p.price}) - Quantity: {p.count}
+          </li>
+          ))}
                 </ul>
 
-                <h3 className='mt-4 mb-4 font-italic'>
-                  Total products in the order: {o.products.length}
-                </h3>
+      
 
-                {o.products.map((p, pIndex) => (
+                {/* {o.products.map((p, pIndex) => (
                   <div
                     className='mb-4'
                     key={pIndex}
@@ -131,7 +135,7 @@ const Orders = () => {
                     {showInput('Product Qty', p.count)}
                     {showInput('Product Id', p._id)}
                   </div>
-                ))}
+                ))} */}
               </div>
             );
           })}

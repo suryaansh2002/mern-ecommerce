@@ -17,7 +17,7 @@ const Cart = () => {
 
   const showItems = (items) => {
     return (
-      <div>
+      <div style={{paddingTop:'4rem'}}>
         <h2>Your cart has {`${items.length}`} items</h2>
         <hr />
         {items.map((product, i) => (
@@ -36,7 +36,8 @@ const Cart = () => {
   };
 
   const noItemsMessage = () => (
-    <h2>
+    <h2  style={{paddingTop:'4rem'}}
+    >
       Your cart is empty. <br /> <Link to='/shop'>Continue shopping</Link>
     </h2>
   );
@@ -52,8 +53,8 @@ const Cart = () => {
         <div className='col-md-4'>
           {items.length > 0 ? showItems(items) : noItemsMessage()}
         </div>
-        <div className='col-md-4'>
-          <h2 className='mb-4'>Your cart summary</h2>
+        <div style={{paddingTop:'4rem'}} className='col-md-4'>
+          <h2 className='mb-4'>Checkout</h2>
           <hr />
           <Checkout products={items} setRun={setRun} run={run} />
         </div>
