@@ -95,7 +95,7 @@ const Orders = () => {
               <div
                 className='mt-5'
                 key={oIndex}
-                style={{ borderBottom: '5px solid indigo' }}
+                style={{ borderBottom: '5px solid red' }}
               >             
 
                 <ul className='list-group mb-2'>
@@ -104,7 +104,7 @@ const Orders = () => {
                   <li className='list-group-item'>Amount: Rs.{o.amount}</li>
                   <li className='list-group-item'>Ordered by: {o.user.name}</li>
                   <li className='list-group-item'>
-                    Ordered on: {moment(o.createdAt).format('DD-MM-YY HH:MM')} ({moment(o.createdAt).fromNow()})
+                    Ordered on: {moment(o.createdAt).format('DD-MM-YY HH:MM')} ({moment(o.createdAt).fromNow()})navig
                   </li>
                   <li className='list-group-item'>
                     Delivery address: {o.address}

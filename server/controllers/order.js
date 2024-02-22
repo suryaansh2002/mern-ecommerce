@@ -1,7 +1,11 @@
 const { Order, CartItem } = require('../models/order');
 const { errorHandler } = require('../helpers/dbErrorHandler');
+// const accountSid = 'AC47c18c4473b3bd09623f835cdbd935b0';
+// const authToken = 'b1f59f60ff11b2831c6a566e2fbc6fa3';
+
 const accountSid = 'AC47c18c4473b3bd09623f835cdbd935b0';
 const authToken = 'b1f59f60ff11b2831c6a566e2fbc6fa3';
+
 const client = require('twilio')(accountSid, authToken);
 
 exports.orderById = (req, res, next, id) => {
@@ -29,14 +33,30 @@ exports.create = (req, res) => {
       });
     }
     console.log(data)
-    const msgString = `Your Order #${data._id} has been placed successfully! Your total amount is: Rs. ${data.amount} ans your order will be delivered to: ${data.address}`
-    // client.messages
-    // .create({
-    //     body: msgString,
-    //     from: 'whatsapp:+14155238886',
-    //     to: 'whatsapp:+919619514015'
-    // })
-    // .then(message => console.log(message.sid))
+    let msgString = `
+    Your Order #${data._id} has been placed successfully!\n
+    Your total amount is: Rs. ${data.amount} and your order will be delivered to: ${data.address}.
+    Please see the dashboard for your Order Details.`
+
+    msgString = `
+New Order: #${data._id} has been placed successfully!\n
+Total Order amount is: Rs. ${data.amount}\n
+Order to be delivered to: ${data.user.name} at: ${data.address}.\n
+Order Details are:\n`
+    data.products.map((p)=>{
+      msgString+=`Item: ${p.name}, Quantity: ${p.count}\n`
+    })
+    msgString+= `\nContact No: ${data.user.mobile}`
+    console.log(msgString)
+   const response =  client.messages
+    .create({
+        body: msgString,
+        from: 'whatsapp:+14155238886',
+        to: 'whatsapp:+919619514015'
+    })
+    .then(message => {
+      console.log(message)
+    })
 
     res.json(data);
   });

@@ -107,11 +107,9 @@ export default function Signin() {
       {redirectUser()}
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
+
         <Typography component='h1' variant='h5'>
-          Sign in
+          Sign In
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
@@ -152,6 +150,8 @@ export default function Signin() {
             variant='contained'
             color='primary'
             className={classes.submit}
+            style={{background:'#5c8059', width:'100%', border:'none', borderRadius:'5px'}}
+
           >
             Sign In
           </Button>

@@ -107,8 +107,9 @@ export const getProducts = () => {
     .catch((err) => console.log(err));
 };
 
-export const deleteProduct = (productId, userId, token) => {
-  return fetch(`${API}/product/${productId}/${userId}`, {
+export const deleteProduct = async(productId, userId, token) => {
+  try{
+  const response = await fetch(`${API}/product/${productId}/${userId}`, {
     method: 'DELETE',
     headers: {
       Accept: 'application/json',
@@ -116,11 +117,13 @@ export const deleteProduct = (productId, userId, token) => {
       Authorization: `Bearer ${token}`,
     },
   })
-    .then((response) => {
-      return response.json();
-    })
-    .catch((err) => console.log(err));
-};
+  console.log(response)
+  console.log(response.json())
+  return response
+
+}
+    catch(err){ console.log(err);}
+}
 
 export const getProduct = (productId) => {
   return fetch(`${API}/product/${productId}`, {

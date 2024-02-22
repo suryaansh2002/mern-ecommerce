@@ -18,13 +18,16 @@ import ManageProducts from './admin/ManageProducts';
 import UpdateProduct from './admin/UpdateProduct';
 import CategoryList from './admin/CategoryList';
 import NotFound from './core/NotFound';
+import About from './core/About';
+import Testimonials from './core/Testimonials';
 
 const Routes = () => {
   return (
     <BrowserRouter>
       <Switch>
         <Route path='/' component={Shop} exact />
-        {/* <Route path='/shop' component={Shop} exact /> */}
+        <Route path='/about' component={About} exact />
+        <Route path='/testimonials' component={Testimonials} exact />
         <Route path='/signin' component={Signin} exact />
         <Route path='/signup' component={Signup} exact />
         <PrivateRoute path='/user/dashboard' component={Dashboard} exact />

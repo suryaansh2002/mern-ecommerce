@@ -94,9 +94,9 @@ const Card = ({
   const showAddToCartBtn = (showAddToCartButton) => {
     return (
       showAddToCartButton && (
-        <Button onClick={addToCart} style={{width:'100%' , border:'1px solid'}} 
+        <Button onClick={addToCart} style={{width:'100%' , border:'1px solid', background:'#5c8059', color:'white'}} 
         variant='contained'
-        color='primary'>
+        >
           Add to cart
         </Button>
       )
@@ -151,6 +151,7 @@ const Card = ({
           color='secondary'
           className={classes.button}
           startIcon={<DeleteIcon />}
+          style={{width:'100%'}}
         >
           Remove Product
         </Button>
@@ -196,10 +197,13 @@ const Card = ({
             {shouldRedirect(redirect)}
             <ShowImage item={product} url='product' />
             <CardContent className={classes.cardContent}>
+              <div className='product-content'>
               <Typography gutterBottom variant='h5' component='h2'>
                 {product.name}
               </Typography>
-              <Typography className={"product-desc"}>{product.description.substring(0, 100)}</Typography>
+              <Typography className={"product-desc"}>{product.description}</Typography>
+              </div>
+
               <div className='card-flex'>
                 <div>
                   <span> {product.category && product.category.name}</span>

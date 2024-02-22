@@ -6,6 +6,7 @@ import Card from './Card';
 import Checkout from './Checkout';
 
 import Copyright from './Copyright';
+import { Button } from '@material-ui/core';
 
 const Cart = () => {
   const [items, setItems] = useState([]);
@@ -17,9 +18,14 @@ const Cart = () => {
 
   const showItems = (items) => {
     return (
-      <div style={{paddingTop:'4rem'}}>
+      <div style={{paddingTop:'3rem'}}>
         <h2>Your cart has {`${items.length}`} items</h2>
         <hr />
+        <div>
+            <Link to={'/'}>
+            <Button style={{width:'90%', textAlign:'center', background:'#5c8059', marginLeft:'5%', color:'white'}}>Continue Shopping</Button>
+            </Link>
+          </div>
         {items.map((product, i) => (
           <Card
             key={i}
@@ -38,7 +44,7 @@ const Cart = () => {
   const noItemsMessage = () => (
     <h2  style={{paddingTop:'4rem'}}
     >
-      Your cart is empty. <br /> <Link to='/shop'>Continue shopping</Link>
+      Your cart is empty. <br /> <Link to='/'>Continue shopping</Link>
     </h2>
   );
 
@@ -51,9 +57,11 @@ const Cart = () => {
       <div className='row'>
         <div className='col-md-2'></div>
         <div className='col-md-4'>
+        
           {items.length > 0 ? showItems(items) : noItemsMessage()}
+         
         </div>
-        <div style={{paddingTop:'4rem'}} className='col-md-4'>
+        <div style={{paddingTop:'2.5rem'}} className='col-md-4'>
           <h2 className='mb-4'>Checkout</h2>
           <hr />
           <Checkout products={items} setRun={setRun} run={run} />

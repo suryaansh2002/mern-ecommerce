@@ -49,7 +49,9 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
       <div>{showDropIn()}</div>
     ) : (
       <Link to='/signin'>
-        <Button variant='contained' color='primary'>
+        <Button variant='contained'
+                style={{background:'#5c8059', width:'100%', border:'none', borderRadius:'5px', color:'white'}}
+                >
           Sign in to checkout
         </Button>
       </Link>
@@ -151,14 +153,14 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
             onChange={(e) => setCompleteAddress(e.target.value)}
             className="mt-1 p-2 border border-gray-300 rounded-md w-100 focus:outline-none focus:ring focus:border-blue-300"
             required
-            placeholder='Enter Flat No.'
+            placeholder='Enter Address'
           ></textarea>
         </div>}
         <div>
         <button
           type="submit"
           className="bg-blue text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300 transition duration-300"
-        style={{background:'blue'}}
+        style={{background:'#5c8059', width:'100%', border:'none', borderRadius:'5px'}}
         onClick={placeOrder}
         >
           Place Order

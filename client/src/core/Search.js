@@ -128,7 +128,7 @@ const Search = () => {
             autoComplete='off'
           />
 
-            <Button ml={2} variant='contained' color='primary' type='submit' className='search-btn'>
+            <Button ml={2} variant='contained' type='submit' className='search-btn'>
               Search
             </Button>
   

@@ -96,11 +96,9 @@ export default function Signup() {
       {showError()}
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
+
         <Typography component='h1' variant='h5'>
-          Sign up
+          Sign Up
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
@@ -155,6 +153,8 @@ export default function Signup() {
             color='primary'
             className={classes.submit}
             onClick={clickSubmit}
+            style={{background:'#5c8059', width:'100%', border:'none', borderRadius:'5px'}}
+
           >
             Sign Up
           </Button>

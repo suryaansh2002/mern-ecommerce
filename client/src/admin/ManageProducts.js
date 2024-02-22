@@ -3,6 +3,7 @@ import Layout from '../core/Layout';
 import { isAuthenticated } from '../auth';
 import { Link } from 'react-router-dom';
 import { getProducts, deleteProduct } from './apiAdmin';
+import { Button } from '@material-ui/core';
 
 const ManageProducts = () => {
   const [products, setProducts] = useState([]);
@@ -19,8 +20,9 @@ const ManageProducts = () => {
     });
   };
 
-  const destroy = (productId) => {
-    deleteProduct(productId, user._id, token).then((data) => {
+  const destroy = async (productId) => {
+   await deleteProduct(productId, user._id, token).then((data) => {
+      console.log(data)
       if (data.error) {
         console.log(data.error);
       } else {
@@ -53,14 +55,14 @@ const ManageProducts = () => {
                 <Link to={`/admin/product/update/${p._id}`}>
                   <span className='badge badge-warning badge-pill'>Update</span>
                 </Link>
-                <Link>
+                <button style={{border:'none', background:'transparent'}}>
                   <span
-                    onClick={() => destroy(p._id)}
+                    onClick={() => {destroy(p._id)}}
                     className='badge badge-danger badge-pill'
                   >
                     Delete
                   </span>
-                </Link>
+                </button>
               </li>
             ))}
           </ul>
