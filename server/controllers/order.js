@@ -100,16 +100,16 @@ Order Details are:\n`
 
 exports.listOrders = (req, res) => {
   Order.find()
-    .populate('user', '_id name address')
-    .sort('-created')
-    .exec((err, orders) => {
-      if (err) {
-        return res.status(400).json({
-          error: errorHandler(error),
-        });
-      }
-      res.json(orders);
-    });
+  .populate('user', '_id name address')
+  .sort({ createdAt: -1 }) // Use -1 to sort in descending order (most recent first)
+  .exec((err, orders) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler(err), // Fix typo: 'error' should be 'err'
+      });
+    }
+    res.json(orders);
+  });
 };
 
 exports.getStatusValues = (req, res) => {
