@@ -2,7 +2,7 @@ const { Order, CartItem } = require('../models/order');
 const { errorHandler } = require('../helpers/dbErrorHandler');
 // const accountSid = 'AC47c18c4473b3bd09623f835cdbd935b0';
 // const authToken = 'b1f59f60ff11b2831c6a566e2fbc6fa3';
-
+const axios = require('axios')
 const accountSid = 'AC47c18c4473b3bd09623f835cdbd935b0';
 const authToken = 'b1f59f60ff11b2831c6a566e2fbc6fa3';
 
@@ -48,6 +48,42 @@ Order Details are:\n`
     })
     msgString+= `\nContact No: ${data.user.mobile}`
     console.log(msgString)
+
+    const url = 'https://messages-sandbox.nexmo.com/v1/messages';
+    const apiKey = '45fbc761';
+    const apiSecret = 'uCusykpRR2d2CXTx';
+    const fromNumber = '14157386102';
+    const toNumber = '919619514015';
+    
+    const requestData = {
+      from: fromNumber,
+      to: toNumber,
+      message_type: 'text',
+      text: msgString,
+      channel: 'whatsapp',
+    };
+    
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
+    
+    // Create a base64 encoded authentication string
+    const authString = Buffer.from(`${apiKey}:${apiSecret}`).toString('base64');
+    
+    // Make the Axios POST request
+    axios.post(url, requestData, {
+      headers: {
+        ...headers,
+        'Authorization': `Basic ${authString}`,
+      },
+    })
+      .then(response => {
+        console.log('Response:', response.data);
+      })
+      .catch(error => {
+        console.error('Error:', error.response.data);
+      });
   //  const response =  client.messages
   //   .create({
   //       body: msgString,
