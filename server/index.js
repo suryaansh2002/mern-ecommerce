@@ -66,6 +66,7 @@ if (process.env.NODE_ENV === 'production') {
 app.get("/", function (req, res) {
   res.send("Welcome to backend");
 });
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
