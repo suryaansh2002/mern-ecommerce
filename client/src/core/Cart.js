@@ -44,7 +44,16 @@ const Cart = () => {
   const noItemsMessage = () => (
     <h2  style={{paddingTop:'4rem'}}
     >
-      Your cart is empty. <br /> <Link to='/'>Continue shopping</Link>
+      <div style={{fontSize:'1.8rem', textAlign:'center', background:'lightgray', borderRadius:'5px', width:'90%', marginLeft:'5%', padding:'0.5rem'}}>
+      Your cart is empty. 
+
+        </div>
+      <br /> 
+      <div>
+            <Link to={'/'}>
+            <Button style={{width:'90%', textAlign:'center', background:'#5c8059', marginLeft:'5%', color:'white'}}>Continue Shopping</Button>
+            </Link>
+          </div>
     </h2>
   );
 

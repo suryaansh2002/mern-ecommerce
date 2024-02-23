@@ -123,7 +123,7 @@ export default function Signup() {
                 required
                 fullWidth
                 id='mobile'
-                label='Mobile No.'
+                label='Mobile No. (without Country Code)'
                 name='mobile'
                 onChange={handleChange('mobile')}
                 type='text'
