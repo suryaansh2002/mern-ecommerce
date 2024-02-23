@@ -6,7 +6,7 @@ const { errorHandler } = require('../helpers/dbErrorHandler');
 const accountSid = 'AC47c18c4473b3bd09623f835cdbd935b0';
 const authToken = 'b1f59f60ff11b2831c6a566e2fbc6fa3';
 
-const client = require('twilio')(accountSid, authToken);
+// const client = require('twilio')(accountSid, authToken);
 
 exports.orderById = (req, res, next, id) => {
   Order.findById(id)
@@ -48,15 +48,15 @@ Order Details are:\n`
     })
     msgString+= `\nContact No: ${data.user.mobile}`
     console.log(msgString)
-   const response =  client.messages
-    .create({
-        body: msgString,
-        from: 'whatsapp:+14155238886',
-        to: 'whatsapp:+919619514015'
-    })
-    .then(message => {
-      console.log(message)
-    })
+  //  const response =  client.messages
+  //   .create({
+  //       body: msgString,
+  //       from: 'whatsapp:+14155238886',
+  //       to: 'whatsapp:+919619514015'
+  //   })
+  //   .then(message => {
+  //     console.log(message)
+  //   })
 
     res.json(data);
   });
