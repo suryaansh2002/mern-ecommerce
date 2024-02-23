@@ -104,7 +104,7 @@ const Orders = () => {
                   <li className='list-group-item'>Amount: Rs.{o.amount}</li>
                   <li className='list-group-item'>Ordered by: {o.user.name}</li>
                   <li className='list-group-item'>
-                    Ordered on: {moment(o.createdAt).format('DD-MM-YY HH:MM')} ({moment(o.createdAt).fromNow()})navig
+                    Ordered on: {moment(o.createdAt).format('DD-MM-YY HH:MM')} ({moment(o.createdAt).fromNow()})
                   </li>
                   <li className='list-group-item'>
                     Delivery address: {o.address}
