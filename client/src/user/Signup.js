@@ -41,20 +41,25 @@ export default function Signup() {
     name: '',
     mobile: '',
     password: '',
+    address:'',
     error: '',
     success: false,
   });
-
-  const { name, mobile, password, success, error } = values;
+  const { name, mobile, password, success, error, address } = values;
 
   const handleChange = (name) => (event) => {
     setValues({ ...values, error: false, [name]: event.target.value });
   };
+  const checkInNRI = (address) => {
+    const lowerCaseAddress = address.toLowerCase();
+    return lowerCaseAddress.includes('nri') || lowerCaseAddress.includes('seawoods estate');
+}
 
   const clickSubmit = (event) => {
     event.preventDefault(); // so that browser does not reload
     setValues({ ...values, error: false });
-    signup({ name, mobile, password }).then((data) => {
+    let inNRI = checkInNRI(address)
+    signup({ name, mobile, password, address, inNRI }).then((data) => {
       if (data.error) {
         setValues({ ...values, error: data.error, success: false });
       } else {
@@ -64,6 +69,7 @@ export default function Signup() {
           mobile: '',
           password: '',
           error: '',
+          address:'',
           success: true,
         });
       }
@@ -143,6 +149,20 @@ export default function Signup() {
                 onChange={handleChange('password')}
                 value={password}
                 autoComplete='current-password'
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant='outlined'
+                required
+                fullWidth
+                name='address'
+                label='Complete Address'
+                type='text'
+                id='address'
+                onChange={handleChange('address')}
+                value={address}
+                autoComplete='address'
               />
             </Grid>
           </Grid>

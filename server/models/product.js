@@ -14,7 +14,13 @@ const productSchema = new mongoose.Schema(
       required: true,
       maxlength: 2000,
     },
-    price: {
+    price1: {
+      type: Number,
+      trim: true,
+      required: true,
+      maxlength: 32,
+    },
+    price2: {
       type: Number,
       trim: true,
       required: true,
@@ -25,20 +31,15 @@ const productSchema = new mongoose.Schema(
       ref: 'Category',
       required: true,
     },
-    quantity: {
-      type: Number,
+    inStock: {
+      type: Boolean,
     },
-    sold: {
-      type: Number,
-      default: 0,
+    highlight: {
+      type: Boolean,
     },
     photo: {
       data: Buffer,
       contentType: String,
-    },
-    shipping: {
-      required: false,
-      type: Boolean,
     },
   },
   { timestamps: true }

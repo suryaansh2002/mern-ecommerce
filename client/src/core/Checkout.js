@@ -17,13 +17,13 @@ const notify = () => toast.success('Order Placed Successfully!');
 
 
 const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
+
   const [data, setData] = useState({
     loading: false,
     success: false,
     clientToken: null,
     error: '',
     instance: {},
-    address: '',
   });
 
   const [selectedAddress, setSelectedAddress] = useState('withinNRI')
@@ -34,14 +34,21 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
 
   const userId = isAuthenticated() && isAuthenticated().user._id;
   const token = isAuthenticated() && isAuthenticated().token;
+  const user = isAuthenticated() && isAuthenticated().user;
 
   useEffect(() => {
   }, []);
 
   const getTotal = () => {
     return products.reduce((currentValue, nextValue) => {
-      return currentValue + nextValue.count * nextValue.price;
-    }, 0);
+      if(user.inNri){
+      return currentValue + nextValue.count * nextValue.price1;
+    } 
+    else{
+      return currentValue + nextValue.count * nextValue.price2;
+
+    }
+  }, 0);
   };
 
   const showCheckout = () => {
@@ -61,12 +68,6 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
   const placeOrder = (e) =>{
     e.preventDefault();
     let addressValue = ''
-    if(selectedAddress === 'withinNRI'){
-      addressValue = `Building ${buildingNo}, Flat: ${flatNo}, NRI Complex`
-    }
-    else{
-      addressValue = completeAddress
-    }
     const tempData = {...data, address: addressValue}
     console.log(tempData)
     setData(tempData)
@@ -75,7 +76,7 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
     console.log(res);
     createOrder(userId, token, {
       products,
-      address: addressValue,
+      address: user.address,
       amount: getTotal()
     }).then(
       (res)=>
@@ -106,7 +107,7 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
         <div>
       <div className="p-4">
       <form>
-      <label htmlFor="location" className="block text-sm font-medium text-gray-700">
+      {/* <label htmlFor="location" className="block text-sm font-medium text-gray-700">
         Select Location:
       </label>
       <select
@@ -155,7 +156,7 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
             required
             placeholder='Enter Address'
           ></textarea>
-        </div>}
+        </div>} */}
         <div>
         <button
           type="submit"

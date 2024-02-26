@@ -28,7 +28,8 @@ const OrderSchema = new mongoose.Schema(
         'Processing',
         'Delivered',
         'Cancelled',
-      ], // enum means string objects
+        'Payment Receivered'
+      ], 
     },
     updated: Date,
     user: { type: ObjectId, ref: 'User' },

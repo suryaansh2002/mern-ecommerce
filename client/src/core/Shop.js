@@ -11,6 +11,7 @@ import Search from './Search';
 import { prices } from './fixedPrices';
 import Copyright from './Copyright';
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import Highlight from './Highlight';
 
 const Shop = () => {
   const [myFilters, setMyFilters] = useState({
@@ -23,8 +24,9 @@ const Shop = () => {
   const [skip, setSkip] = useState(0);
   const [size, setSize] = useState(0);
   const [filteredResults, setFilteredResults] = useState([]);
+  const [highlightedResults, setHighlightedResults] = useState({})
   const [showFilter, setShowFilters] = useState(false)
-
+  const [selectedCategory, setSelectedCategory] = useState('')
   const init = () => {
     getCategories().then((data) => {
       if (data.error) {
@@ -37,6 +39,7 @@ const Shop = () => {
 
   const loadFilteredResults = (newFilters) => {
     // console.log(newFilters);
+    console.log(newFilters)
     getFilteredProducts(skip, limit, newFilters).then((data) => {
       if (data.error) {
         setError(data.error);
@@ -47,7 +50,17 @@ const Shop = () => {
       }
     });
   };
+  const getHighlightedResults = ()=>{
+    getFilteredProducts(skip, limit, {highlight: [true]}).then((data) => {
+      if (data.error) {
+        setError(data.error);
+      } else {
+      console.log(data.data)
+      setHighlightedResults(data.data[0])
+      }
+    });
 
+  }
   const loadMore = () => {
     let toSkip = skip + limit;
     // console.log(newFilters);
@@ -92,10 +105,20 @@ const Shop = () => {
   useEffect(() => {
     init();
     loadFilteredResults(skip, limit, myFilters.filters);
+    getHighlightedResults();
   }, []);
 
+  useEffect(()=>{
+    console.log(selectedCategory)
+    if(selectedCategory.length>0){
+      handleFilters([selectedCategory], 'category');
+    }
+    else{
+      handleFilters([], 'category');
+    }
+  },[selectedCategory])
   const handleFilters = (filters, filterBy) => {
-    // console.log("SHOP", filters, filterBy);
+    console.log("SHOP", filters, filterBy);
     const newFilters = { ...myFilters };
     newFilters.filters[filterBy] = filters;
 
@@ -124,10 +147,24 @@ const Shop = () => {
       title='Shop page'
       description='Search and find books'
       className='container-fluid'
-    >
+    >  
+ {highlightedResults &&    <div style={{padding:'1rem 0rem'}}>
+    <Highlight product={highlightedResults}/>
+  </div>}
       <Search />
+      <div className='filter-btn-container'>
+        {categories.map((category)=>(
+          <button onClick={()=>{
+            selectedCategory===category._id ? setSelectedCategory('') : setSelectedCategory(category._id)           
+          }}
+          style={selectedCategory===category._id ? {background: '#5c8059', color: 'white'} : {} }
+          >{category.name}</button>
+        ))}
+      </div>
+    
       <div className='row' style={{width:'100%'}}>
-        <div className='col-md-2' style={{textAlign:'left'}}>
+        
+        {/* <div className='col-md-2' style={{textAlign:'left'}}>
           <h4 className='filter-heading' onClick={()=>{setShowFilters(!showFilter)}}>Filter by Category {showFilter ?<FaChevronUp/> : <FaChevronDown/>}</h4>
          {showFilter && <ul className='filter-list'>
             <Checkbox
@@ -135,12 +172,13 @@ const Shop = () => {
               handleFilters={(filters) => handleFilters(filters, 'category')}
             />
           </ul>}
-        </div>
+        </div> */}
+        
 
-        <div className='col-md-10' style={{width: '100%', margin: 0, padding: 0}}>
+        <div className='col-md-12' style={{width: '100%', margin: 0, padding: 0}}>
           <div className='row'>
-            {filteredResults.filter((item)=>item.quantity>0).map((product, i) => (
-              <div key={i} className='col-xl-4 col-lg-6 col-md-12 col-sm-12'>
+            {filteredResults.filter((item)=>item.inStock).map((product, i) => (
+              <div key={i} className='col-xl-3 col-lg-4 col-md-12 col-sm-12'>
                 <Card product={product} />
               </div>
             ))}

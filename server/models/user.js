@@ -33,6 +33,14 @@ const userSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
+    address: {
+      type: String,
+      default: '',
+    },
+    inNRI: {
+      type: Boolean,
+      default: true,
+    },
   },
   { timestamps: true }
 );

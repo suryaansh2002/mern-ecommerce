@@ -18,6 +18,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
+import { isAuthenticated } from '../auth';
 
 import { addItem, updateItem, removeItem } from './cartHelpers';
 
@@ -65,10 +66,12 @@ const Card = ({
   setRun = (f) => f, // default value of function
   run = undefined, // default value of undefined
 }) => {
+  const { user, token } = isAuthenticated();
   const [redirect, setRedirect] = useState(false);
   const [count, setCount] = useState(product.count);
 
   const showViewButton = (showViewProductButton) => {
+
     return (
       showViewProductButton && (
         <Link href={`/product/${product._id}`} className='mr-2'>
@@ -189,9 +192,9 @@ const Card = ({
     //   </div>
     // </div>
 
-    <Container className={classes.cardGrid} maxWidth='md'>
+    <Container className={classes.cardGrid} >
       <CssBaseline />
-      <Grid container spacing={2}>
+      <Grid container spacing={0}>
         <Grid item xs={12} sm={12} md={12}>
           <CardM className={classes.card}>
             {shouldRedirect(redirect)}
@@ -209,7 +212,9 @@ const Card = ({
                   <span> {product.category && product.category.name}</span>
                 </div>
                 <div className='card-price'>
-                Rs. {product.price}
+                {user ? <>Rs. {user.inNRI ? product.price1 : product.price2}</> : 
+                <a style={{color: 'black', fontWeight:'normal',textDecoration: 'underline'}} href={'/signin'}>View Price</a>
+                 }
                 </div>
               </div>
 

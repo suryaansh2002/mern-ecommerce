@@ -48,59 +48,74 @@ Order Details are:\n`
     })
     msgString+= `\nContact No: ${data.user.mobile}`
     console.log(msgString)
-
-    const url = 'https://messages-sandbox.nexmo.com/v1/messages';
-    const apiKey = '45fbc761';
-    const apiSecret = 'uCusykpRR2d2CXTx';
-    const fromNumber = '14157386102';
-    const toNumber = '919619514015';
-    
-    const requestData = {
-      from: fromNumber,
-      to: toNumber,
-      message_type: 'text',
-      text: msgString,
-      channel: 'whatsapp',
-    };
+    const url = 'https://graph.facebook.com/v18.0/243140868882599/messages';
+    const accessToken = 'EAAFCCdRQ45gBOZBZCaZB2xsE6hw9OnZA6US403QR2UfryERhoW51cTxhHw9LiSeJO5KZBDOTOkQuWABJ7q8AHcTI48XhqKwPYZC2sdGVuUklQo0ScklwD2bcfk6liZBWecKJxOvZAcwltF2uV9wDVDdoekTZBdGI2rCilAqcZBWYdbxXbg5OFdPdSufQYIZCdrjzY24MGXwgz6C5Hja0CvshbgZD';
     
     const headers = {
+      'Authorization': `Bearer ${accessToken}`,
       'Content-Type': 'application/json',
-      'Accept': 'application/json',
     };
     
-    // Create a base64 encoded authentication string
-    const authString = Buffer.from(`${apiKey}:${apiSecret}`).toString('base64');
+    const requestData = {
+      messaging_product: 'whatsapp',
+      to: '919619514015',
+      type: 'text',
+      text: {body: msgString}
+    };
     
-    // Make the Axios POST request
-    axios.post(url, requestData, {
-      headers: {
-        ...headers,
-        'Authorization': `Basic ${authString}`,
-      },
-    })
+    axios.post(url, requestData, { headers })
       .then(response => {
         console.log('Response:', response.data);
       })
       .catch(error => {
         console.error('Error:', error.response.data);
       });
-  //  const response =  client.messages
-  //   .create({
-  //       body: msgString,
-  //       from: 'whatsapp:+14155238886',
-  //       to: 'whatsapp:+919619514015'
-  //   })
-  //   .then(message => {
-  //     console.log(message)
-  //   })
+    // const url = 'https://messages-sandbox.nexmo.com/v1/messages';
+    // const apiKey = '45fbc761';
+    // const apiSecret = 'uCusykpRR2d2CXTx';
+    // const fromNumber = '14157386102';
+    // const toNumber = '919619514015';
+    
+    // const requestData = {
+    //   from: fromNumber,
+    //   to: toNumber,
+    //   message_type: 'text',
+    //   text: msgString,
+    //   channel: 'whatsapp',
+    // };
+    
+    // const headers = {
+    //   'Content-Type': 'application/json',
+    //   'Accept': 'application/json',
+    // };
+    
+    // // Create a base64 encoded authentication string
+    // const authString = Buffer.from(`${apiKey}:${apiSecret}`).toString('base64');
+    
+    // // Make the Axios POST request
+    // axios.post(url, requestData, {
+    //   headers: {
+    //     ...headers,
+    //     'Authorization': `Basic ${authString}`,
+    //   },
+    // })
+    //   .then(response => {
+    //     console.log('Response:', response.data);
+    //   })
+    //   .catch(error => {
+    //     console.error('Error:', error.response.data);
+    //   });
+
+
 
     res.json(data);
   });
 };
 
 exports.listOrders = (req, res) => {
+  console.log("HERE")
   Order.find()
-  .populate('user', '_id name address')
+  .populate('user', '_id name address inNRI')
   .sort({ createdAt: -1 }) // Use -1 to sort in descending order (most recent first)
   .exec((err, orders) => {
     if (err) {

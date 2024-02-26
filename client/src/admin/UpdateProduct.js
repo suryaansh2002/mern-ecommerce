@@ -8,11 +8,12 @@ const UpdateProduct = ({ match }) => {
   const [values, setValues] = useState({
     name: '',
     description: '',
-    price: '',
+    price1: '',
+    price2: '',
     categories: [],
     category: '',
-    shipping: '',
-    quantity: '',
+    inStock:'',
+    highlight: '',
     photo: '',
     loading: false,
     error: false,
@@ -26,7 +27,10 @@ const UpdateProduct = ({ match }) => {
   const {
     name,
     description,
-    price,
+    price1,
+    price2,
+    inStock,
+    highlight,
     // categories,
     // category,
     // shipping,
@@ -48,10 +52,11 @@ const UpdateProduct = ({ match }) => {
           ...values,
           name: data.name,
           description: data.description,
-          price: data.price,
+          price1: data.price1,
+          price2: data.price2,
           category: data.category._id,
-          shipping: data.shipping,
-          quantity: data.quantity,
+          inStock: data.inStock,
+          highlight:data.highlight,
           formData: new FormData(),
         });
         // load categories
@@ -95,8 +100,10 @@ const UpdateProduct = ({ match }) => {
             name: '',
             description: '',
             photo: '',
-            price: '',
-            quantity: '',
+            price1: '',
+            price2: '',
+            inStock: '',
+            highlight:'',
             loading: false,
             error: false,
             redirectToProfile: true,
@@ -141,12 +148,22 @@ const UpdateProduct = ({ match }) => {
       </div>
 
       <div className='form-group'>
-        <label className='text-muted'>Price</label>
+        <label className='text-muted'>Price Within NRI</label>
         <input
-          onChange={handleChange('price')}
+          onChange={handleChange('price1')}
           type='number'
           className='form-control'
-          value={price}
+          value={price1}
+        />
+      </div>
+
+      <div className='form-group'>
+        <label className='text-muted'>Price Outside NRI</label>
+        <input
+          onChange={handleChange('price2')}
+          type='number'
+          className='form-control'
+          value={price2}
         />
       </div>
 
@@ -164,8 +181,8 @@ const UpdateProduct = ({ match }) => {
       </div>
 
       <div className='form-group'>
-        <label className='text-muted'>Shipping</label>
-        <select onChange={handleChange('shipping')} className='form-control'>
+        <label className='text-muted'>In Stock</label>
+        <select onChange={handleChange('inStock')} className='form-control'>
           <option>Please select</option>
           <option value='0'>No</option>
           <option value='1'>Yes</option>
@@ -173,13 +190,12 @@ const UpdateProduct = ({ match }) => {
       </div>
 
       <div className='form-group'>
-        <label className='text-muted'>Quantity</label>
-        <input
-          onChange={handleChange('quantity')}
-          type='number'
-          className='form-control'
-          value={quantity}
-        />
+        <label className='text-muted'>Highlight Product</label>
+        <select onChange={handleChange('highlight')} className='form-control'>
+          <option>Please select</option>
+          <option value='0'>No</option>
+          <option value='1'>Yes</option>
+        </select>
       </div>
 
       <button className='btn btn-outline-primary'>Update Product</button>

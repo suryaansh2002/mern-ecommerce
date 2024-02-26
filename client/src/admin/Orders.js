@@ -3,6 +3,7 @@ import Layout from '../core/Layout';
 import { isAuthenticated } from '../auth';
 import { listOrders, getStatusValues, updateOrderStatus } from './apiAdmin';
 import moment from 'moment';
+import * as XLSX from 'xlsx';
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -17,6 +18,34 @@ const Orders = () => {
         setOrders(data);
       }
     });
+  };
+
+  const downloadExcel = () => {
+    const tempOrders = orders;
+    const resultOrders = tempOrders.map((originalData)=>{
+      const productsObject = {}
+      originalData.products.map((obj) => {
+        productsObject[obj['name']]=obj['count']
+      })
+
+      console.log(productsObject)
+      const modifiedData = {
+        _id: originalData._id,
+        status: originalData.status,
+        products: JSON.stringify(productsObject),
+        address: originalData.address,
+        amount: originalData.amount,
+        user:  originalData.user.name,
+        orderDate: moment(originalData.createdAt).format('DD-MM-YYYY')
+      };
+      return modifiedData
+    })
+    const ws = XLSX.utils.json_to_sheet(resultOrders);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Orders Data');
+
+    // Save the file
+    XLSX.writeFile(wb, `Orders Data as of ${moment().format('DD-MM-YYYY')}.xlsx`);
   };
 
   const loadStatusValues = () => {
@@ -86,6 +115,10 @@ const Orders = () => {
       title='Orders'
       description={`Hey ${user.name}, you can manage all the ordes here`}
     >
+      <div style={{textAlign:'center'}}>
+      <button className='download-btn' onClick={downloadExcel}>Download Excel</button>
+
+      </div>
       <div className='row'>
         <div className='col-md-8 offset-md-2'>
           {showOrdersLength()}
@@ -117,7 +150,7 @@ const Orders = () => {
               
                 {o.products.map((p, pIndex) => (
           <li className='list-group-item'>
-            {p.name} (Rs. {p.price}) - Quantity: {p.count}
+            {p.name} : {p.count}
           </li>
           ))}
                 </ul>

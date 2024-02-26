@@ -17,6 +17,22 @@ body *{
 .load-btn{
   
 }
+
+.filter-btn-container{
+display: flex;
+justify-content: space-around;
+width: 40%;
+margin-left: 50%;
+transform: translateX(-50%);
+}
+.filter-btn-container button{
+  background-color: transparent;
+  font-size: 1rem;
+  padding: 0.2rem 1rem;
+  border-radius: 5px; 
+  border: 1px solid rgb(186, 186, 186); 
+}
+
   .product-content{
     min-height: 11rem;
   }
@@ -88,8 +104,51 @@ text-align: center;
     margin-top: 3rem;
     font-size: 2rem;
   }
+  .download-btn{
+    background-color: #5c8059;
+    color: white;
+    font-weight: 500;
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    border: none;
+  }
+  .highlight-card{
+    width: 80%;
+    margin-left: 10%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px 2px lightgray;
+    text-align: center;
+    padding: 0.5rem 1rem;
+  }
+  .highlit-header{
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-left: 8%;
+  }
+  .highlight-content-left{
+    display: inline-block;
+    width: 40%;
+  }
+  .highlight-content-right{
+    display: inline-block;
+    width: 55%;
+    font-size: 1.25rem;
+    text-align: left;
+    vertical-align: top;
+    padding-top: 2rem;
+  }
   @media only screen and (max-width: 700px) {
-    .filter-heading{
+    .filter-btn-container{
+      width: 100%;
+      }
+      .filter-btn-container button{
+        font-size: 0.85rem;
+      }
+
+      .filter-heading{
         font-size: 1.25rem;
         margin-top: 0rem;
         margin-left: 1rem;

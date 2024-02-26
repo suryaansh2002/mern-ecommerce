@@ -7,11 +7,12 @@ const AddProduct = () => {
   const [values, setValues] = useState({
     name: '',
     description: '',
-    price: '',
+    price1: '',
+    price2: '',
     categories: [],
     category: '',
-    shipping: '',
-    quantity: '',
+    inStock: '',
+    highlight:'',
     photo: '',
     loading: false,
     error: '',
@@ -25,11 +26,12 @@ const AddProduct = () => {
   const {
     name,
     description,
-    price,
+    price1,
+    price2,
     categories,
     category,
-    shipping,
-    quantity,
+    inStock,
+    highlight,
     photo,
     loading,
     error,
@@ -119,12 +121,22 @@ const AddProduct = () => {
       </div>
 
       <div className='form-group'>
-        <label className='text-muted'>Price</label>
+        <label className='text-muted'>Price Within NRI</label>
         <input
-          onChange={handleChange('price')}
+          onChange={handleChange('price1')}
           type='number'
           className='form-control'
-          value={price}
+          value={price1}
+        />
+      </div>
+
+      <div className='form-group'>
+        <label className='text-muted'>Price Outside NRI</label>
+        <input
+          onChange={handleChange('price2')}
+          type='number'
+          className='form-control'
+          value={price2}
         />
       </div>
 
@@ -142,8 +154,8 @@ const AddProduct = () => {
       </div>
 
       <div className='form-group'>
-        <label className='text-muted'>Shipping</label>
-        <select onChange={handleChange('shipping')} className='form-control'>
+        <label className='text-muted'>In Stock</label>
+        <select onChange={handleChange('inStock')} className='form-control'>
           <option>Please select</option>
           <option value='0'>No</option>
           <option value='1'>Yes</option>
@@ -151,13 +163,12 @@ const AddProduct = () => {
       </div>
 
       <div className='form-group'>
-        <label className='text-muted'>Quantity</label>
-        <input
-          onChange={handleChange('quantity')}
-          type='number'
-          className='form-control'
-          value={quantity}
-        />
+        <label className='text-muted'>Highlight Product</label>
+        <select onChange={handleChange('highlight')} className='form-control'>
+          <option>Please select</option>
+          <option value='0'>No</option>
+          <option value='1'>Yes</option>
+        </select>
       </div>
 
       <button className='btn btn-outline-primary'>Create Product</button>
