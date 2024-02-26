@@ -19,6 +19,7 @@ const Dashboard = () => {
       if (data.error) {
         console.log(data.error);
       } else {
+        console.log(data)
         setHistory(data);
       }
     });
@@ -68,24 +69,31 @@ const Dashboard = () => {
       <div className='card mb-5'>
         <h3 className='card-header'>Purchase history</h3>
         <ul className='list-group'>
-          <li className='list-group-item'>
             {history.map((h, i) => {
               return (
+                <li className='list-group-item'>
                 <div>
-                  <hr />
-                  {h.products.map((p, i) => {
+                  <div>
+                  <h6>Order Id: {h._id}</h6>
+                  <h6>Order Date: {moment(h.createdAt).format('DD-MM-YYYY')}</h6>
+                  <h6>Total Order Amount: Rs. {h.amount}</h6>
+                  <h6>Order Status: {h.status}</h6>
+                  <hr/>
+                  <h6>Order Details:</h6>
+
+                  </div>
+                    {h.products.map((p, i) => {
                     return (
                       <div key={i}>
-                        <h6>Product name: {p.name}</h6>
-                        <h6>Product price: Rs.{p.price}</h6>
-                        <h6>Purchased date: {moment(p.createdAt).fromNow()}</h6>
+                        <h6>{p.name}: Quantity: {p.count}</h6>
                       </div>
                     );
                   })}
+
                 </div>
+                </li>
               );
             })}
-          </li>
         </ul>
       </div>
     );

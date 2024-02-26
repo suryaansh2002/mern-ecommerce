@@ -20,6 +20,7 @@ import CategoryList from './admin/CategoryList';
 import NotFound from './core/NotFound';
 import About from './core/About';
 import Testimonials from './core/Testimonials';
+import Contact from './core/Contact';
 
 const Routes = () => {
   return (
@@ -27,6 +28,7 @@ const Routes = () => {
       <Switch>
         <Route path='/' component={Shop} exact />
         <Route path='/about' component={About} exact />
+        <Route path='/contact' component={Contact} exact />
         <Route path='/testimonials' component={Testimonials} exact />
         <Route path='/signin' component={Signin} exact />
         <Route path='/signup' component={Signup} exact />

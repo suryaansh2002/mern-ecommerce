@@ -16,6 +16,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { FaInfoCircle } from "react-icons/fa";
 import { AiFillTrophy } from "react-icons/ai";
+import { FaPhoneAlt } from "react-icons/fa";
 
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Button from "@material-ui/core/Button";
@@ -225,7 +226,17 @@ const MaterialAppBar = ({ history }) => {
             </Link>
           </MenuItem>
         )}
-
+   <MenuItem>
+          <Link style={isActive(history, "/contact")} to="/contact">
+            <IconButton aria-label="Contact" color="inherit">
+              <FaPhoneAlt />
+              <Typography style={{ marginLeft: "0.2rem" }}>
+                {" "}
+                Contact Us
+              </Typography>
+            </IconButton>
+          </Link>
+        </MenuItem>
         {!isAuthenticated() && (
           <Fragment>
             <MenuItem>
@@ -341,6 +352,15 @@ const MaterialAppBar = ({ history }) => {
                 </IconButton>
               </Link>
             )}
+            <Link style={isActive(history, "/contact")} to="/contact">
+            <IconButton aria-label="Contact" color="inherit">
+              <FaPhoneAlt />
+              <Typography style={{ marginLeft: "0.2rem" }}>
+                {" "}
+                Contact Us
+              </Typography>
+            </IconButton>
+          </Link>
 
             {!isAuthenticated() && (
               <Fragment>
