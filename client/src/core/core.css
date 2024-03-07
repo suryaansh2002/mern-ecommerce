@@ -66,19 +66,28 @@ transform: translateX(-50%);
   border-radius: 10px;
   box-shadow: 5px 2px 5px 5px rgba(211, 211, 211, 0.301);
   padding: 1rem;
-  font-size: .95rem;
-  display: inline-block;
+  display: flex;
   margin: 1rem;
-  max-width: 25rem;
-  min-height: 13rem;
+  width: 15rem;
+  height:25rem;
   vertical-align: top;
-  text-align: left;
-  font-style: italic;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.testimonials-card img{
+  width: 100%;
+
 }
 .testimonials-container{
 padding-top: 2rem;
 width: 90vw;
 text-align: center;
+display: flex;
+flex-direction: row;
+flex-wrap: wrap; /* This allows items to wrap onto a new line if they don't fit */
+
 }
 .checkbox-name{
   font-size: 0.85rem;
@@ -141,6 +150,10 @@ text-align: center;
     padding-top: 2rem;
   }
   @media only screen and (max-width: 700px) {
+    .testimonials-card{
+      width: 90vw;
+      height: auto;
+    }
       .highlight-card{
       width: 95%;
       margin-left: 2.5%;

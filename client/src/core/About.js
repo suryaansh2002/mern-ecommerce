@@ -51,26 +51,28 @@ export default function About() {
           </div>
           <div className="about-txt">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-              dictum non ipsum in tempor. Nunc pulvinar neque nec diam faucibus,
-              id lobortis erat eleifend. Nulla ac enim ac turpis elementum
-              tempor. Fusce hendrerit facilisis tincidunt. Vestibulum congue
-              quam dolor, in viverra eros semper non. Maecenas dignissim neque
-              hendrerit cursus vulputate. Mauris mollis felis augue, et luctus
-              arcu interdum eget. Sed imperdiet eros turpis. Duis est ante,
-              ultrices sed pharetra nec, fringilla quis neque.
+              Idli and Dosa are age old healthy breakfast options in every
+              household. This organic idli/dosa batter is prepared using 100%
+              natural ingredients, ground and fermented using traditional
+              methods to prepare fluffy and soft idlis and dosas for your
+              family.
             </p>
             <p>
-              Maecenas scelerisque velit id nulla consequat dignissim. Aliquam
-              euismod porta lorem in sollicitudin. Integer malesuada scelerisque
-              dolor, eu venenatis arcu volutpat id. Nulla et porttitor elit. In
-              non interdum nibh. Proin dictum diam orci, vel egestas arcu
-              euismod in. Etiam porta dignissim venenatis. Donec suscipit lectus
-              nec sapien convallis eleifend et non erat. Duis et interdum
-              sapien. Nunc in neque pharetra, laoreet leo sed, pharetra est.
-              Donec sit amet ex enim.
-            </p>{" "}
+              <ul>
+                <li>100% Home made</li>
+                <li>Stone Ground</li>
+                <li>Naturally Fermented</li>
+                <li>No Preservatives</li>
+                <li>Packaged Hygienically</li>
+                <li>Thick Consistency</li>
+
+              </ul>
+            </p>
+            <p>
+            You can also find us <b><a href="https://g.co/kgs/1aBwSrh" target="_blank" rel="noreferrer">here</a></b>.
+            </p>
           </div>
+         
         </div>
       </Container>
       <Copyright />

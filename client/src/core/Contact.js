@@ -52,13 +52,7 @@ export default function Contact() {
               In case of any queries or issues please reach out to us at:
               <ul>
                 <li>
-                  Call: +91 999999999
-                </li>
-                <li>
-                  Whatsapp: +91 999999999
-                </li>
-                <li>
-                  Email: classicbatters@gmail.com
+                  Call/Whatsapp: +91 99789 42082
                 </li>
               </ul>
               <p>

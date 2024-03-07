@@ -17,6 +17,16 @@ import Copyright from "./Copyright";
 import { testimonialsData } from "./TestimonialsData";
 import TestimonialsCard from "./testimonialsCard";
 
+import image1 from '../images/testimonials/1.png'
+import image2 from '../images/testimonials/2.png'
+import image3 from '../images/testimonials/3.png'
+import image4 from '../images/testimonials/4.png'
+import image5 from '../images/testimonials/5.png'
+import image6 from '../images/testimonials/6.png'
+import image7 from '../images/testimonials/7.png'
+import image8 from '../images/testimonials/8.png'
+
+const testimonialImages = [image1,image2,image3,image4,image5,image5,image6,image7]
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -49,7 +59,7 @@ export default function Testimonials() {
             Our Testimonials
           </Typography>
           <div class="testimonials-container">
-         {testimonialsData.map((item)=>(<TestimonialsCard text={item.text} name={item.name}/>))}
+         {testimonialImages.map((item)=>(<TestimonialsCard image={item}/>))}
           </div>
         </div>
       </Container>
